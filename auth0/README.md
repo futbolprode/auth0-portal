@@ -23,7 +23,8 @@ token claim `https://auth0-portal.vercel.app/profile`, consumed by the portal.
 Root Auth0 name/picture fields remain unchanged. Existing social names/photos
 remain available as fallbacks.
 
-Spanish is enabled in tenant languages; the portal requests `ui_locales=es`.
+Spanish is the tenant default; English remains supported when requested by
+the browser. The portal does not override Auth0 language selection.
 
 To verify end to end, a new email/password signup should show the Spanish form,
 allows an empty image, displays the submitted name, and does not repeat the

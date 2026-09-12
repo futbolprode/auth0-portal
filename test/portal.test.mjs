@@ -195,7 +195,7 @@ describe("portal login flow", () => {
         calls[0][1].authorizationParams.redirect_uri,
         "https://portal.example/"
       );
-      assert.equal(calls[0][1].authorizationParams.ui_locales, "es");
+      assert.equal(calls[0][1].authorizationParams.ui_locales, undefined);
     } finally {
       dom.window.close();
     }

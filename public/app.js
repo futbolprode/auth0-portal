@@ -23,7 +23,6 @@
       authorizationParams: {
         redirect_uri: callbackUrl,
         scope: "openid profile email",
-        ui_locales: "es",
         ...(config.organization ? { organization: config.organization } : {}),
       },
     });
