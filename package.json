@@ -1,0 +1,21 @@
+{
+  "name": "auth0-portal",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.9.0"
+  },
+  "scripts": {
+    "build": "node --env-file-if-exists=.env build.mjs",
+    "start": "node --env-file-if-exists=.env start.mjs",
+    "dev": "node --watch --env-file-if-exists=.env start.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@auth0/auth0-spa-js": "2.24.1"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}

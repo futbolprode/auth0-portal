@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Nuestra plataforma · Portal de demostración</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script defer src="/auth0.js"></script>
+    <script defer src="/app.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="brand">NP</span
+        ><span
+          >Portal de acceso
+          <small>Demostración de inicio de sesión único</small></span
+        >
+      </header>
+      <p id="status" role="status" aria-live="polite">Cargando portal…</p>
+      <p id="error" role="alert" hidden></p>
+      <section id="login-view" class="card" aria-labelledby="heading">
+        <p class="eyebrow">UNA CUENTA. DOS PLATAFORMAS.</p>
+        <h1 id="heading">Tu próximo paso<br />empieza aquí.</h1>
+        <p class="intro">
+          Inicia sesión en este portal y accede a nuestra plataforma con tu
+          sesión de Auth0.
+        </p>
+        <button id="login" type="button" disabled>
+          Iniciar sesión con Auth0 <span aria-hidden="true">→</span>
+        </button>
+        <p class="note">
+          Nuestra plataforma puede pedirte que completes el registro o aceptes
+          una invitación.
+        </p>
+        <noscript>Activa JavaScript para iniciar sesión.</noscript>
+      </section>
+      <section id="dashboard" hidden aria-labelledby="welcome">
+        <div class="welcome-row">
+          <div>
+            <p class="eyebrow">TU PORTAL</p>
+            <h1 id="welcome">Hola, <span id="name"></span></h1>
+            <p id="email"></p>
+          </div>
+          <span class="session-badge">Sesión iniciada</span>
+        </div>
+        <section class="platform-card" aria-labelledby="platform-heading">
+          <div>
+            <p class="eyebrow">TODO EN UN SOLO LUGAR</p>
+            <h2 id="platform-heading">Conecta con lo que viene.</h2>
+            <p>
+              Descubre las actividades y participa en nuestra plataforma con tu
+              cuenta.
+            </p>
+          </div>
+          <a id="platform" class="primary" hidden
+            >Ir a nuestra plataforma <span aria-hidden="true">↗</span></a
+          >
+        </section>
+        <section class="news" aria-labelledby="news-heading">
+          <div class="news-heading">
+            <h2 id="news-heading">Novedades</h2>
+            <span>Contenido de demostración</span>
+          </div>
+          <div class="news-grid">
+            <article class="news-card">
+              <div class="news-art season" aria-hidden="true">01</div>
+              <div class="news-body">
+                <p class="eyebrow">PARTICIPA</p>
+                <h3>Nueva temporada</h3>
+                <p>
+                  Una nueva etapa para compartir desafíos, descubrir propuestas
+                  y sumar experiencias.
+                </p>
+              </div>
+            </article>
+            <article class="news-card">
+              <div class="news-art community" aria-hidden="true">02</div>
+              <div class="news-body">
+                <p class="eyebrow">CONECTA</p>
+                <h3>Actividades de la comunidad</h3>
+                <p>
+                  Conoce las iniciativas que nos acercan y encuentra nuevas
+                  formas de participar.
+                </p>
+              </div>
+            </article>
+            <article class="news-card">
+              <div class="news-art events" aria-hidden="true">03</div>
+              <div class="news-body">
+                <p class="eyebrow">DESCUBRE</p>
+                <h3>Próximos eventos</h3>
+                <p>
+                  Muy pronto habrá nuevos encuentros y actividades para
+                  disfrutar en comunidad.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+        <button id="logout" class="secondary" type="button" hidden>
+          Cerrar sesión en Auth0
+        </button>
+      </section>
+      <footer>
+        Nuestra plataforma <span>·</span> Conectada mediante Auth0
+      </footer>
+    </main>
+  </body>
+</html>
