@@ -72,8 +72,21 @@
     document.querySelector("main").classList.toggle("signed-in", authenticated);
     if (authenticated) {
       const user = await client.getUser();
-      document.querySelector("#name").textContent = user?.name ?? "bienvenido";
+      const profile = user?.["https://auth0-portal.vercel.app/profile"];
+      const name = profile?.name || user?.name;
+      document.querySelector("#name").textContent =
+        typeof name === "string" && name.trim() && name !== user?.email
+          ? name : "bienvenido";
       document.querySelector("#email").textContent = user?.email ?? "";
+      const avatar = document.querySelector("#avatar");
+      try {
+        const picture = new URL(profile?.picture || user?.picture);
+        if (picture.protocol === "https:" && !picture.username && !picture.password) {
+          avatar.addEventListener("error", () => { avatar.hidden = true; });
+          avatar.src = picture.href;
+          avatar.hidden = false;
+        }
+      } catch { /* A profile image is optional. */ }
       platform.href = config.platformUrl;
     }
   } catch (error) {

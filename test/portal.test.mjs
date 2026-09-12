@@ -124,6 +124,7 @@ async function portal({
   error,
   url = "https://portal.example/",
   configError = false,
+  user = { name: "<img src=x onerror=alert(1)>", email: "test@example.com" },
 } = {}) {
   const dom = new JSDOM(html, { url, runScripts: "outside-only" });
   const calls = [];
@@ -150,10 +151,7 @@ async function portal({
         return authenticated;
       }
       async getUser() {
-        return {
-          name: "<img src=x onerror=alert(1)>",
-          email: "test@example.com",
-        };
+        return user;
       }
     },
   };
@@ -166,6 +164,25 @@ async function portal({
 }
 
 describe("portal login flow", () => {
+  it("displays the collected profile and hides failed images", async () => {
+    const { dom, element } = await portal({ authenticated: true, user: {
+      name: "test@example.com",
+      "https://auth0-portal.vercel.app/profile": {name: "Ana Pérez", picture: "https://images.example/ana.jpg"},
+    }});
+    try {
+      assert.equal(element("name").textContent, "Ana Pérez");
+      assert.equal(element("avatar").hidden, false);
+      element("avatar").dispatchEvent(new dom.window.Event("error"));
+      assert.equal(element("avatar").hidden, true);
+    } finally { dom.window.close(); }
+  });
+  it("rejects unsafe profile images", async () => {
+    const { dom, element } = await portal({ authenticated: true, user: {
+      picture: "javascript:alert(1)",
+    }});
+    try { assert.equal(element("avatar").hasAttribute("src"), false); }
+    finally { dom.window.close(); }
+  });
   it("requires portal login before showing the platform link", async () => {
     const { dom, calls, element } = await portal();
     try {
@@ -178,6 +195,7 @@ describe("portal login flow", () => {
         calls[0][1].authorizationParams.redirect_uri,
         "https://portal.example/"
       );
+      assert.equal(calls[0][1].authorizationParams.ui_locales, undefined);
     } finally {
       dom.window.close();
     }

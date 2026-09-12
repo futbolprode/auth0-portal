@@ -175,6 +175,13 @@ main.signed-in {
 }
 .welcome-row > div {
   min-width: 0;
+  flex: 1;
+}
+#avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .welcome-row .eyebrow {
   margin-bottom: 12px;
